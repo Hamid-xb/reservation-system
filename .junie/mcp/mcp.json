@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "C:\\php\\php.exe",
+            "args": [
+                "D:\\Documents\\Github\\reservation-system\\reservation-system\\artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
