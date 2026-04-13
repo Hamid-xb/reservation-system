@@ -83,4 +83,3 @@ sail composer <command>
 - The `.env` file must NOT be committed to version control.
 - Use `.env.example` as the template for local configuration.
 - Ensure Docker is running before executing Laravel Sail commands.
-- Sail commands can be run using `sail` instead of `./vendor/bin/sail` by using an alias.
