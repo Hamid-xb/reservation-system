@@ -13,6 +13,7 @@ A reservation tool for restaurants designed to attract more customers, streamlin
 
 ## Setup Instructions
 
+
 ### 1. Clone the repository
 ```bash
 git clone <your-repo-url>
@@ -24,36 +25,37 @@ cd reservation-system
 cp .env.example .env
 ```
 
-### 3. Start the application 
+### 3. Install dependecies
 ```bash
-sail up -d
+composer install
 ```
 
-### 4. Install dependencies
+### 4. Start the application 
 ```bash
-sail composer install
+./vendo/bin/sail up -d
 ```
+
 ### 5. Generate application key
 ```bash
-sail artisan key:generate
+./vendo/bin/sail artisan key:generate
 ```
 
 ### 6. Run database migrations
 ```bash
-sail artisan migrate
+./vendo/bin/sail artisan migrate
 ```
 
 ### Run NPM
 ```bash
-sail npm install
-sail npm run dev
+./vendo/bin/sail npm install
+./vendo/bin/sail npm run dev
 ```
 
 ## Running the project
 
 ### Start the containers:
 ```bash
-sail up -d
+./vendo/bin/sail up -d
 ```
 
 #### Open in browser:
@@ -63,19 +65,19 @@ http://localhost
 
 ### Stop the project:
 ```bash
-sail down
+./vendo/bin/sail down
 ```
 
 
 ## Useful commands
 ### Run Artisan commands:
 ```bash
-sail artisan <command>
+./vendo/bin/sail artisan <command>
 ```
 
 ### Run Composer commands: 
 ```bash
-sail composer <command>
+./vendo/bin/sail composer <command>
 ```
 
 ## Notes
