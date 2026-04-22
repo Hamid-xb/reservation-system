@@ -16,7 +16,7 @@ A reservation tool for restaurants designed to attract more customers, streamlin
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Hamid-xb/reservation-system
 cd reservation-system
 ```
 
@@ -37,30 +37,30 @@ docker run --rm \
 
 ### 4. Start the application 
 ```bash
-./vendo/bin/sail up -d
+./vendor/bin/sail up -d
 ```
 
 ### 5. Generate application key
 ```bash
-./vendo/bin/sail artisan key:generate
+./vendor/bin/sail artisan key:generate
 ```
 
 ### 6. Run database migrations
 ```bash
-./vendo/bin/sail artisan migrate
+./vendor/bin/sail artisan migrate
 ```
 
 ### Run NPM
 ```bash
-./vendo/bin/sail npm install
-./vendo/bin/sail npm run dev
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
 ```
 
 ## Running the project
 
 ### Start the containers:
 ```bash
-./vendo/bin/sail up -d
+./vendor/bin/sail up -d
 ```
 
 #### Open in browser:
@@ -70,19 +70,19 @@ http://localhost
 
 ### Stop the project:
 ```bash
-./vendo/bin/sail down
+./vendor/bin/sail down
 ```
 
 
 ## Useful commands
 ### Run Artisan commands:
 ```bash
-./vendo/bin/sail artisan <command>
+./vendor/bin/sail artisan <command>
 ```
 
 ### Run Composer commands: 
 ```bash
-./vendo/bin/sail composer <command>
+./vendor/bin/sail composer <command>
 ```
 
 ## Notes
