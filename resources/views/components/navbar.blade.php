@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/navigation.blade.php -->
 <nav x-data="{ open: false, userMenuOpen: false, submenuOpen: false }" class="bg-[#f8f4ef] backdrop-blur-md border-b border-[#f5d7c4] sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
