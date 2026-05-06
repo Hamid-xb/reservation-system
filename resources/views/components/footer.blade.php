@@ -1,5 +1,5 @@
 <footer class="bg-stone-900 text-stone-300 mt-16 rounded-t-[40px]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto py-12">
         <div class="flex flex-col md:flex-row justify-between items-center gap-8">
             <!-- Brand -->
             <div class="flex-shrink-0">
