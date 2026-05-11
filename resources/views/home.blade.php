@@ -74,7 +74,7 @@
                             @if($restaurant->banner)
                                 <img src="{{ $restaurant->banner }}" alt="{{ $restaurant->name }}" class="w-full h-full object-cover">
                             @else
-                                <span class="text-4xl opacity-30">🍽️</span>
+                                <img src="{{ asset("img/default-restaurant-banner.jpg") }}" alt="Default Restaurant Banner" class="w-full h-full object-cover">
                             @endif
                             
                             <!-- Cuisine Tag -->
@@ -83,7 +83,7 @@
                                     {{ $restaurant->type }} keuken
                                 </span>
                             @endif
-                        </div> 
+                        </div>
 
                         <!-- Content -->
                         <div class="p-6">
