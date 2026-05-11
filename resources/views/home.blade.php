@@ -65,55 +65,49 @@
         <h2 class="text-3xl font-bold mt-6 mb-4 text-center">Populaire Restaurants</h2>
         <h5 class="text-lg text-stone-600 mb-8 text-center">Ontdek de beste restaurants in jouw stad</h5>
 
-        <div>
-            <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-amber-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-        
-                @foreach($restaurants as $restaurant)
-                    @php
-                        $name = $restaurant['name'] ?? 'Onbekend Restaurant';
-                        $description = $restaurant['description'] ?? null;
-                        $location = $restaurant['location'] ?? null;
-                        $cuisine = $restaurant['cuisine'] ?? null;
-                        $image = $restaurant['image'] ?? null;
-                    @endphp
-                    <!-- Image -->
-                    <div class="h-48 bg-gradient-to-br from-amber-200 to-orange-200 relative flex items-center justify-center">
-                        @if($restaurant->image)
-                            <img src="{{ $restaurant->image }}" alt="{{ $restaurant->name }}" class="w-full h-full object-cover">
-                        @else
-                            <span class="text-4xl opacity-30">🍽️</span>
-                        @endif
-                        
-                        <!-- Cuisine Tag -->
-                        @if($restaurant->cuisine)
-                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-red-600 uppercase tracking-wide">
-                                {{ $restaurant->cuisine }} keuken
-                            </span>
-                        @endif
-                    </div> 
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($restaurants as $restaurant)
+                <a href="{{ route('restaurants.show', $restaurant->id) }}" class="block">    
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-amber-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                        <!-- Image -->
+                        <div class="h-48 bg-gradient-to-br from-amber-200 to-orange-200 relative flex items-center justify-center">
+                            @if($restaurant->banner)
+                                <img src="{{ $restaurant->banner }}" alt="{{ $restaurant->name }}" class="w-full h-full object-cover">
+                            @else
+                                <span class="text-4xl opacity-30">🍽️</span>
+                            @endif
+                            
+                            <!-- Cuisine Tag -->
+                            @if($restaurant->type)
+                                <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-red-600 uppercase tracking-wide">
+                                    {{ $restaurant->type }} keuken
+                                </span>
+                            @endif
+                        </div> 
 
-                    <!-- Content -->
-                    <div class="p-6">
-                        <!-- Title -->
-                        <h3 class="text-xl font-bold text-stone-900 mb-2">{{ $name }}</h3>
-                        
-                        <!-- Location -->
-                        @if($restaurant->location)
-                            <p class="text-stone-500 text-sm mb-3">📍 {{ $restaurant->location }}</p>
-                        @endif
-                        
-                        <!-- Description -->
-                        @if($restaurant->description)
-                            <p class="text-stone-600 text-sm mb-4 leading-relaxed">{{ $restaurant->description }}</p>
-                        @endif
-                        
-                        <!-- Button -->
-                        <button class="w-full bg-red-600 text-white py-2.5 rounded-full font-semibold hover:bg-red-700 transition-colors">
-                            Reserveer nu
-                        </button>
+                        <!-- Content -->
+                        <div class="p-6">
+                            <!-- Title -->
+                            <h3 class="text-xl font-bold text-stone-900 mb-2">{{ $restaurant->name }}</h3>
+                            
+                            <!-- Location -->
+                            @if($restaurant->location)
+                                <p class="text-stone-500 text-sm mb-3">📍 {{ $restaurant->location }}</p>
+                            @endif
+                            
+                            <!-- Description -->
+                            @if($restaurant->description)
+                                <p class="text-stone-600 text-sm mb-4 leading-relaxed">{{ $restaurant->description }}</p>
+                            @endif
+                            
+                            <!-- Button -->
+                            <button class="w-full bg-red-600 text-white py-2.5 rounded-full font-semibold hover:bg-red-700 transition-colors">
+                                Reserveer nu
+                            </button>
+                        </div>
                     </div>
-                @endforeach
-            </div>
+                </a>
+            @endforeach
         </div>
-    </section>    
+    </section> 
 @endsection
