@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index()
     {
         $restaurants = \App\Models\Restaurant::latest()->take(6)->get();
-        
+
         return view('home', compact('restaurants'));
     }
 }
