@@ -9,6 +9,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $restaurants = \App\Models\Restaurant::latest()->take(6)->get();
+        
+        return view('home', compact('restaurants'));
     }
 }
