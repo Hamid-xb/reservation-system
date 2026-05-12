@@ -26,12 +26,10 @@
             <x-navbar />
         </div>
         
-        <div class="max-w-7xl mx-auto mt-6 py-4">
+        <main class="min-h-[calc(100vh-200px)] max-w-7xl mx-auto mt-6 py-4">
             @yield('content')
-        </div>
+        </main>
 
-        <div>
-            <x-footer />
-        </div>
+        <x-footer />
     </body>
 </html>
