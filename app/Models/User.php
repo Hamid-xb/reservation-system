@@ -41,7 +41,19 @@ class User extends Authenticatable
             'user_roles',
             'user_id',
             'restaurant_id'
-        );
+        )->distinct();
+    }
+
+    public function hasRestaurantRole(int $restaurantId, string|array $roles): bool
+    {
+        $roles = is_array($roles) ? $roles : [$roles];
+
+        return $this->userRoles()
+            ->where('restaurant_id', $restaurantId)
+            ->whereHas('role', function ($query) use ($roles) {
+                $query->whereIn('name', $roles);
+            })
+            ->exists();
     }
 
     protected function casts(): array
