@@ -35,6 +35,9 @@
                 <div class="flex items-center w-full md:flex-1 border-t md:border-t-0 md:border-l border-amber-200 md:pl-4">
                     <span class="text-stone-400 mr-2">🍴</span>
                     <select name="cuisine" class="w-full py-3 px-2 bg-transparent border-none focus:ring-0 text-stone-700 cursor-pointer text-sm">
+                        <option value="" {{ ($cuisine ?? '') == 'none' ? 'selected' : '' }}>
+                            Alle keukens
+                        </option>
                         <option value="Frans" {{ ($cuisine ?? '') == 'Frans' ? 'selected' : '' }}>
                             Frans
                         </option>
