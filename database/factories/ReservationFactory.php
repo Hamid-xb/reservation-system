@@ -25,7 +25,9 @@ class ReservationFactory extends Factory
             'status' => fake()->randomElement([
                 'pending',
                 'confirmed',
+                'completed',
                 'cancelled',
+                'no_show',
             ]),
             'reservation_type' => fake()->randomElement([
                 'user_created',
