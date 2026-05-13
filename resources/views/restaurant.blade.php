@@ -47,12 +47,6 @@
                 
                 <div class="prose max-w-none text-stone-700 leading-relaxed space-y-4">
                     <p>{{ $restaurant->description }}</p>
-                    
-                    @if($restaurant->long_description)
-                        <p>{{ $restaurant->long_description }}</p>
-                    @else
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    @endif
                 </div>
             </div>
         </div>
