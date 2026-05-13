@@ -58,15 +58,14 @@
         'restaurant_manager',
         ]))
             <a
-                href="#"
-                class="mx-3 mb-2 flex items-center gap-3 rounded-2xl px-6 py-3 font-medium transition
+                href="{{ $restaurant ? route('restaurant.gallery.index', $restaurant) : '#' }}"                class="mx-3 mb-2 flex items-center gap-3 rounded-2xl px-6 py-3 font-medium transition
                 {{ $active === 'photos'
                     ? 'bg-[#c53a1f] text-white shadow-md'
                     : 'text-[#cfc2b8] hover:bg-[#c53a1f] hover:text-white'
                 }}"
             >
                 <span class="text-lg">📸</span>
-                <span>Foto's</span>
+                <span>Galerij</span>
             </a>
         @endif
 
@@ -109,13 +108,22 @@
 
 
     <div class="border-t border-[#3a2f28] p-6">
-        <a
-            href="/"
-            class="mb-3 flex items-center gap-3 rounded-2xl bg-[#c53a1f] px-4 py-3 font-medium text-white transition hover:opacity-90"
-        >
-            <span>🏠</span>
-            <span>Mijn Restaurant</span>
-        </a>
+        <div class="mb-3 flex overflow-hidden rounded-2xl bg-[#3a2f28]">
+            <a
+                href="#"
+                class="flex flex-1 items-center gap-3 px-4 py-3 font-medium text-white transition hover:bg-[#c53a1f]"
+            >
+                <span>🏠</span>
+                <span>Mijn Restaurant</span>
+            </a>
+
+            <a
+                href="{{ $restaurant ? route('restaurant.settings.edit', $restaurant) : '#' }}"                class="group flex w-14 items-center justify-center border-l border-[#4a3b32] text-white transition hover:bg-[#c53a1f]"
+                title="Restaurant instellingen"
+            >
+                <span class="inline-block transition-transform duration-300 group-hover:rotate-90">⚙️</span>
+            </a>
+        </div>
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
@@ -129,4 +137,5 @@
             </button>
         </form>
     </div>
+
 </aside>

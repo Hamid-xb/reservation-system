@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Restaurant;
 
+use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Models\Role;
-use App\Models\UserRole;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 
 class RestaurantMemberController extends Controller

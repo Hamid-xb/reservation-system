@@ -18,8 +18,6 @@ return new class extends Migration
             $table->time('open_time');
             $table->time('close_time');
             $table->timestamps();
-
-           // $table->unique(['restaurant_id', 'day_of_week']);
         });
     }
 

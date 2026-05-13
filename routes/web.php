@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Restaurant\RestaurantDashboardController;
+use App\Http\Controllers\Restaurant\RestaurantGalleryController;
+use App\Http\Controllers\Restaurant\RestaurantMemberController;
+use App\Http\Controllers\Restaurant\RestaurantReservationController;
+use App\Http\Controllers\Restaurant\RestaurantTableController;
+use App\Http\Controllers\Restaurant\RestaurantSettingsController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RestaurantDashboardController;
-use App\Http\Controllers\RestaurantTableController;
-use App\Http\Controllers\RestaurantReservationController;
-use App\Http\Controllers\RestaurantMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +137,46 @@ Route::middleware('auth')->group(function () {
                 RestaurantMemberController::class,
                 'destroy'
             ])->name('members.destroy');
+
+
+            Route::get('/gallery', [
+                RestaurantGalleryController::class,
+                'index'
+            ])->name('gallery.index');
+
+            Route::post('/gallery', [
+                RestaurantGalleryController::class,
+                'store'
+            ])->name('gallery.store');
+
+            Route::patch('/gallery/order', [
+                RestaurantGalleryController::class,
+                'updateOrder'
+            ])->name('gallery.order');
+
+
+            Route::delete('/gallery/{image}', [
+                RestaurantGalleryController::class,
+                'destroy'
+            ])->name('gallery.destroy');
+
+            /*
+            |--------------------------------------------------------------------------
+            | Settings
+            |--------------------------------------------------------------------------
+            */
+
+            Route::get('/settings', [
+                RestaurantSettingsController::class,
+                'edit'
+            ])->name('settings.edit');
+
+            Route::put('/settings', [
+                RestaurantSettingsController::class,
+                'update'
+            ])->name('settings.update');
+
+
 
         });
 
