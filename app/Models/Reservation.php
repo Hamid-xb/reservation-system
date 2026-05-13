@@ -14,6 +14,10 @@ class Reservation extends Model
         'start_datetime', 'end_datetime',
         'status', 'reservation_type', 'reservation_note'
     ];
+    protected $casts = [
+        'start_datetime' => 'datetime',
+        'end_datetime' => 'datetime',
+    ];
 
     public function reservationTables(){
         return $this->hasMany(ReservationTable::class);

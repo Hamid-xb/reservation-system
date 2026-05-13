@@ -9,7 +9,12 @@ class RestaurantImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['restaurant_id', 'image_url', 'image_type'];
+    protected $fillable = [
+        'restaurant_id',
+        'image_url',
+        'image_type',
+        'sort_order',
+    ];
 
     public function restaurant(){
         return $this->belongsTo(Restaurant::class);
