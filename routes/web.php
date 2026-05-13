@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Restaurant\RestaurantDashboardController;
 use App\Http\Controllers\Restaurant\RestaurantGalleryController;
 use App\Http\Controllers\Restaurant\RestaurantMemberController;
@@ -30,6 +31,9 @@ Route::get('/dashboard', function () {
 ])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // reservation routes
+    Route::get('/reservations/restaurant/{restaurant}', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::post('/reservations/restaurant/{restaurant}', [ReservationController::class, 'store'])->name('reservations.store');
 
     /*
     |--------------------------------------------------------------------------

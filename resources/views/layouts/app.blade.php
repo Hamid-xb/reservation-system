@@ -27,6 +27,20 @@
         </div>
         
         <main class="min-h-[calc(100vh-200px)] max-w-7xl mx-auto mt-6 py-4">
+             @if (session('success'))
+            <div class="flex justify-center w-full">
+                <div class="w-full text-center mb-5 bg-green-300 rounded p-4">
+                    {{ session('success') }}
+                </div>
+            </div>
+        @endif
+            @if (session('error'))
+                <div class="flex justify-center w-full">
+                    <div class="w-full text-center mb-5 bg-red-400 rounded p-4">
+                        {{ session('error') }}
+                    </div>
+                </div>
+            @endif
             @yield('content')
         </main>
 

@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Home - Tafello')
 @section('content')
-    
-   
-
     <section id="search" class="mt-5">
         <form action="{{ route('search') }}" method="GET">
             <div class="bg-white rounded-full p-2 pl-6 flex flex-col md:flex-row items-center gap-3 shadow-lg border border-amber-200">
@@ -81,10 +78,10 @@
         @endif
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($restaurants as $restaurant)
-                <a href="{{ route('restaurants.show', $restaurant->id) }}" class="block">    
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-amber-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                        <!-- Image -->
+            @foreach($restaurants as $restaurant)   
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-amber-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <!-- Image -->
+                        <a href="{{ route('restaurants.show', $restaurant->id) }}" class="block">
                         <div class="h-48 bg-gradient-to-br from-amber-200 to-orange-200 relative flex items-center justify-center">
                             @if($restaurant->banner)
                                 <img src="{{ $restaurant->banner }}" alt="{{ $restaurant->name }}" class="w-full h-full object-cover">
@@ -99,29 +96,33 @@
                                 </span>
                             @endif
                         </div>
+                    </a>
 
-                        <!-- Content -->
-                        <div class="p-6">
-                            <!-- Title -->
-                            <h3 class="text-xl font-bold text-stone-900 mb-2">{{ $restaurant->name }}</h3>
-                            
-                            <!-- Location -->
-                            @if($restaurant->location)
-                                <p class="text-stone-500 text-sm mb-3">📍 {{ $restaurant->location }}</p>
-                            @endif
-                            
-                            <!-- Description -->
-                            @if($restaurant->description)
-                                <p class="text-stone-600 text-sm mb-4 leading-relaxed">{{ $restaurant->description }}</p>
-                            @endif
-                            
-                            <!-- Button -->
-                            <button class="w-full bg-red-600 text-white py-2.5 rounded-full font-semibold hover:bg-red-700 transition-colors">
+                    <!-- Content -->
+                    <div class="p-6">
+                        <!-- Title -->
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">{{ $restaurant->name }}</h3>
+                        
+                        <!-- Location -->
+                        @if($restaurant->location)
+                            <p class="text-stone-500 text-sm mb-3">📍 {{ $restaurant->location }}</p>
+                        @endif
+                        
+                        <!-- Description -->
+                        @if($restaurant->description)
+                            <p class="text-stone-600 text-sm mb-4 leading-relaxed">{{ $restaurant->description }}</p>
+                        @endif
+                        
+                        <!-- Button -->
+                        <div class="mt-4">
+                        <a href="{{ route('reservations.create', $restaurant->id) }}">
+                            <x-primary-button class="w-full">
                                 Reserveer nu
-                            </button>
-                        </div>
+                            </x-primary-button>
+                        </a>
                     </div>
-                </a>
+                    </div>
+                </div>
             @endforeach
         </div>
     </section> 
