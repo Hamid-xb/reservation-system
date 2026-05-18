@@ -25,7 +25,7 @@
         <div>
             <x-navbar />
         </div>
-        
+
         <main class="min-h-[calc(100vh-200px)] max-w-7xl mx-auto mt-6 py-4">
             @yield('content')
         </main>

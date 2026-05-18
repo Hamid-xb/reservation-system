@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\RestaurantType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RestaurantFactory extends Factory
@@ -15,13 +16,7 @@ class RestaurantFactory extends Factory
                 'active',
                 'inactive',
             ]),
-            'restaurant_type' => fake()->randomElement([
-                'Yemeni',
-                'Italian',
-                'Japanese',
-                'Fast Food',
-                'Steakhouse',
-            ]),
+            'restaurant_type_id' => RestaurantType::query()->inRandomOrder()->value('id'),
         ];
     }
 }

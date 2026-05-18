@@ -17,27 +17,6 @@
     @endif
 
     @php
-        $cuisines = [
-            'italian' => 'Italiaans',
-            'french' => 'Frans',
-            'spanish' => 'Spaans',
-            'greek' => 'Grieks',
-            'turkish' => 'Turks',
-            'moroccan' => 'Marokkaans',
-            'surinamese' => 'Surinaams',
-            'indonesian' => 'Indonesisch',
-            'chinese' => 'Chinees',
-            'japanese' => 'Japans',
-            'thai' => 'Thais',
-            'indian' => 'Indiaas',
-            'mexican' => 'Mexicaans',
-            'american' => 'Amerikaans',
-            'dutch' => 'Nederlands',
-            'vegan' => 'Vegan',
-            'vegetarian' => 'Vegetarisch',
-            'other' => 'Anders',
-        ];
-
         $days = [
             0 => 'Maandag',
             1 => 'Dinsdag',
@@ -83,17 +62,17 @@
                     </label>
 
                     <select
-                        name="restaurant_type"
+                        name="restaurant_type_id"
                         class="w-full rounded-full border border-[#f0e2d4] bg-[#fefaf5] px-5 py-3 focus:border-[#c53a1f] focus:ring-[#c53a1f]"
                     >
                         <option value="">Selecteer keuken</option>
 
-                        @foreach($cuisines as $value => $label)
+                        @foreach($restaurantTypes as $type)
                             <option
-                                value="{{ $value }}"
-                                @selected(old('restaurant_type', $restaurant->restaurant_type) === $value)
+                                value="{{ $type->id }}"
+                                @selected(old('restaurant_type_id', $restaurant->restaurant_type_id) == $type->id)
                             >
-                                {{ $label }}
+                                {{ $type->name }}
                             </option>
                         @endforeach
                     </select>
