@@ -61,7 +61,8 @@
         'restaurant_manager',
         ]))
             <a
-                href="{{ $restaurant ? route('restaurant.gallery.index', $restaurant) : '#' }}"                class="mx-3 mb-2 flex items-center gap-3 rounded-2xl px-6 py-3 font-medium transition
+                href="{{ $restaurant ? route('restaurant.gallery.index', $restaurant) : '#' }}"
+                class="mx-3 mb-2 flex items-center gap-3 rounded-2xl px-6 py-3 font-medium transition
                 {{ $active === 'photos'
                     ? 'bg-[#c53a1f] text-white shadow-md'
                     : 'text-[#cfc2b8] hover:bg-[#c53a1f] hover:text-white'

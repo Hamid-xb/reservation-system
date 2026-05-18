@@ -117,9 +117,14 @@ Route::middleware('auth')->group(function () {
                 'destroy'
             ])->name('reservations.destroy');
 
+            Route::patch('/reservations/{reservation}/confirm', [
+                RestaurantReservationController::class,
+                'confirm'
+            ])->name('reservations.confirm');
+
             /*
             |--------------------------------------------------------------------------
-            | Reservations
+            | Members
             |--------------------------------------------------------------------------
             */
 

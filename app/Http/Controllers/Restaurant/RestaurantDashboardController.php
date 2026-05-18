@@ -28,7 +28,12 @@ class RestaurantDashboardController extends Controller
             ->whereDate('start_datetime', today())
             ->count();
 
-        $pendingReservations = $restaurant
+        $pendingReservations = $restaurant->reservations()
+            ->where('status', 'pending')
+            ->orderBy('start_datetime')
+            ->get();
+
+        $pendingReservationsCount = $restaurant
             ->reservations()
             ->where('status', 'pending')
             ->count();
@@ -49,8 +54,10 @@ class RestaurantDashboardController extends Controller
             'totalReservations' => $totalReservations,
             'todayReservations' => $todayReservations,
             'pendingReservations' => $pendingReservations,
+            'pendingReservationsCount' => $pendingReservationsCount,
             'confirmedReservations' => $confirmedReservations,
             'recentReservations' => $recentReservations,
         ]);
+
     }
 }
