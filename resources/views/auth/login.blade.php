@@ -1,4 +1,3 @@
-<!-- resources/views/auth/login.blade.php -->
 <x-guest-layout>
     <div class="text-center mb-6">
         <h2 class="text-2xl font-bold text-stone-900">Welkom terug</h2>

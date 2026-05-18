@@ -1,5 +1,5 @@
-<!-- resources/views/auth/register.blade.php -->
-<x-guest-layout>
+<x-guest-layout
+    title="Registreren - Tafello">
     <div class="text-center mb-6">
         <h2 class="text-2xl font-bold text-stone-900">Account aanmaken</h2>
         <p class="text-sm text-stone-500 mt-1">Word lid van Tafello en reserveer jouw tafel</p>

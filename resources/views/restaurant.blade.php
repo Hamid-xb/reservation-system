@@ -1,9 +1,5 @@
-<!-- resources/views/restaurants/show.blade.php -->
-@extends('layouts.app')
-
-@section('title', $restaurant->name)
-
-@section('content')
+<x-app-layout 
+    title="{{ $restaurant->name }} - Tafello">
 <div>
     
     <!-- Hero Image -->
@@ -114,4 +110,4 @@
         
     </div>
 </div>
-@endsection
+</x-app-layout>

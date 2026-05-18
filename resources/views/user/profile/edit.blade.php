@@ -1,13 +1,12 @@
-@extends('layouts.app')
-@section('title', 'Profile')
-@section('content')
+<x-app-layout
+    title="Profiel - Tafello">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Profile') }}
         </h2>
     </x-slot>
 
-    <h1>Profiel Pagina</h1>
+    <h1 class="text-2xl font-bold text-stone-900">Profiel Pagina</h1>
 
     <div class="py-12">
         <div class="w-full space-y-6">
@@ -30,4 +29,4 @@
             </x-card>
         </div>
     </div>
-@endsection
+</x-app-layout>

@@ -2,10 +2,10 @@
 <section class="space-y-6">
     <header>
         <h2 class="text-xl font-bold text-stone-900">
-            {{ __('Delete Account') }}
+            {{ __('Account Verwijderen') }}
         </h2>
         <p class="mt-1 text-sm text-stone-500">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+            {{ __('Zodra uw account is verwijderd, worden alle bijbehorende gegevens en informatie permanent gewist. Download daarom alle gegevens en informatie die u wilt bewaren voordat u uw account verwijdert.') }}
         </p>
     </header>
 
@@ -14,7 +14,7 @@
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
         class="px-6 py-2.5 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition-colors"
     >
-        {{ __('Delete Account') }}
+        {{ __('Account Verwijderen') }}
     </button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
@@ -23,20 +23,20 @@
             @method('delete')
 
             <h2 class="text-lg font-bold text-stone-900">
-                {{ __('Are you sure you want to delete your account?') }}
+                {{ __('Weet u zeker dat u uw account wilt verwijderen?') }}
             </h2>
 
             <p class="mt-1 text-sm text-stone-500">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                {{ __('Zodra uw account is verwijderd, worden alle bijbehorende gegevens en informatie permanent gewist. Download daarom alle gegevens en informatie die u wilt bewaren voordat u uw account verwijdert.') }}
             </p>
 
             <div class="mt-6">
-                <label for="password" class="sr-only">{{ __('Password') }}</label>
+                <label for="password" class="sr-only">{{ __('Wachtwoord') }}</label>
                 <input
                     id="password"
                     name="password"
                     type="password"
-                    placeholder="{{ __('Password') }}"
+                    placeholder="{{ __('Wachtwoord') }}"
                     class="w-full px-4 py-2.5 border border-amber-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500"
                 >
                 @error('password', 'userDeletion')
@@ -50,14 +50,14 @@
                     type="button"
                     class="px-6 py-2.5 border-2 border-red-600 text-red-600 rounded-full font-semibold hover:bg-red-50 transition-colors"
                 >
-                    {{ __('Cancel') }}
+                    {{ __('Annuleren') }}
                 </button>
 
                 <button
                     type="submit"
                     class="px-6 py-2.5 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition-colors"
                 >
-                    {{ __('Delete Account') }}
+                    {{ __('Account Verwijderen') }}
                 </button>
             </div>
         </form>

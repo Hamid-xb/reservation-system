@@ -2,10 +2,10 @@
 <section>
     <header class="mb-6">
         <h2 class="text-xl font-bold text-stone-900">
-            {{ __('Profile Information') }}
+            {{ __('Profiel Informatie') }}
         </h2>
         <p class="mt-1 text-sm text-stone-500">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __('Werk uw accountinformatie en e-mailadres bij.') }}
         </p>
     </header>
 
@@ -20,7 +20,7 @@
         <!-- Name -->
         <div>
             <label for="name" class="block text-sm font-medium text-stone-700 mb-1">
-                {{ __('Name') }}
+                {{ __('Naam') }}
             </label>
             <input 
                 id="name" 
@@ -82,7 +82,7 @@
                 type="submit" 
                 class="px-6 py-2.5 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 hover:shadow-lg transition-all duration-200"
             >
-                {{ __('Save') }}
+                {{ __('Opslaan') }}
             </button>
 
             @if (session('status') === 'profile-updated')
@@ -93,7 +93,7 @@
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-green-600 font-medium"
                 >
-                    ✅ {{ __('Saved.') }}
+                    ✅ {{ __('Opgeslagen.') }}
                 </p>
             @endif
         </div>

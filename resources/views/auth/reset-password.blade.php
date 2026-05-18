@@ -1,5 +1,5 @@
-<!-- resources/views/auth/reset-password.blade.php -->
-<x-guest-layout>
+<x-guest-layout
+    title="Wachtwoord resetten - Tafello">
     <div class="text-center mb-6">
         <h2 class="text-2xl font-bold text-stone-900">Wachtwoord resetten</h2>
         <p class="text-sm text-stone-500 mt-1">Stel je nieuwe wachtwoord in</p>

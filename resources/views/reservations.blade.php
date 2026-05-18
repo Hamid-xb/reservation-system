@@ -1,9 +1,5 @@
-<!-- resources/views/reservations/create.blade.php -->
-@extends('layouts.app')
-
-@section('title', 'Reservering maken')
-
-@section('content')
+<x-app-layout 
+    title="Reservering maken - Tafello">
 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     
     <!-- Back Button -->
@@ -158,4 +154,4 @@
         </form>
     </div>
 </div>
-@endsection
+</x-app-layout>
