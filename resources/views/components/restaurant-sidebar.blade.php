@@ -9,8 +9,11 @@
 
 <aside class="fixed left-0 top-0 flex h-screen w-[280px] flex-col overflow-y-auto bg-gradient-to-b from-[#1a1410] to-[#2c2418] text-[#ddd2c9] shadow-xl">
     <div class="border-b border-[#3a2f28] px-6 py-8">
+        <div class="flex-shrink-0">
+            <x-application-logo />
+        </div>
         <div class="bg-gradient-to-r from-[#f7bc7a] to-[#e67e22] bg-clip-text text-2xl font-extrabold text-transparent">
-            🍽️ EetGemak
+            {{$restaurant->name}}
         </div>
 
         <small class="mt-1 block text-sm text-[#9c8674]">
@@ -110,7 +113,7 @@
     <div class="border-t border-[#3a2f28] p-6">
         <div class="mb-3 flex overflow-hidden rounded-2xl bg-[#3a2f28]">
             <a
-                href="#"
+                href="{{ $restaurant ? route('restaurants.show', $restaurant) : '#' }}"
                 class="flex flex-1 items-center gap-3 px-4 py-3 font-medium text-white transition hover:bg-[#c53a1f]"
             >
                 <span>🏠</span>
@@ -118,7 +121,8 @@
             </a>
 
             <a
-                href="{{ $restaurant ? route('restaurant.settings.edit', $restaurant) : '#' }}"                class="group flex w-14 items-center justify-center border-l border-[#4a3b32] text-white transition hover:bg-[#c53a1f]"
+                href="{{ $restaurant ? route('restaurant.settings.edit', $restaurant) : '#' }}"
+                class="group flex w-14 items-center justify-center border-l border-[#4a3b32] text-white transition hover:bg-[#c53a1f]"
                 title="Restaurant instellingen"
             >
                 <span class="inline-block transition-transform duration-300 group-hover:rotate-90">⚙️</span>
