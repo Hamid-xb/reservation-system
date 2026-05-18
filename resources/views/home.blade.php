@@ -84,7 +84,7 @@
                         <a href="{{ route('restaurants.show', $restaurant->id) }}" class="block">
                         <div class="h-48 bg-gradient-to-br from-amber-200 to-orange-200 relative flex items-center justify-center">
                             @if($restaurant->banner)
-                                <img src="{{ $restaurant->banner }}" alt="{{ $restaurant->name }}" class="w-full h-full object-cover">
+                                <img src="{{ asset($restaurant->banner->image_url) }}" alt="{{ $restaurant->name }}" class="w-full h-full object-cover">
                             @else
                                 <img src="{{ asset("img/default-restaurant-banner.jpg") }}" alt="Default Restaurant Banner" class="w-full h-full object-cover">
                             @endif

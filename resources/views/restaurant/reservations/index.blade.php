@@ -117,12 +117,12 @@
 
                             <td class="py-4">
                                 <div class="flex flex-wrap gap-2">
-                                    <button
-                                        type="button"
+                                    <a
+                                        href="{{ route('restaurant.reservations.edit', [$restaurant, $reservation]) }}"
                                         class="rounded-full bg-[#e67e22] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#c96b18]"
                                     >
                                         Details
-                                    </button>
+                                    </a>
 
                                     <form
                                         method="POST"
