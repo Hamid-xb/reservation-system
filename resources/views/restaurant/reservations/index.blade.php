@@ -46,6 +46,13 @@
                 >
                     Vandaag
                 </a>
+
+                <a
+                    href="{{ route('reservations.create', ['restaurant' => $restaurant, 'date' => $selectedDate, 'reservation_type' => 'staff_created']) }}"
+                    class="rounded-full bg-[#c53a1f] px-5 py-3 text-center font-semibold text-white transition hover:bg-[#9f2f17]"
+                >
+                    + Nieuwe reservering
+                </a>
             </form>
         </div>
 
@@ -95,16 +102,16 @@
                                     </span>
                                 @elseif($reservation->status === 'cancelled')
                                     <span class="rounded-full bg-[#ffe8e3] px-3 py-1 text-sm font-medium text-[#c53a1f]">
-                                    Geannuleerd
-                                </span>
+                                        Geannuleerd
+                                    </span>
                                 @elseif($reservation->status === 'pending')
                                     <span class="rounded-full bg-[#fff4d6] px-3 py-1 text-sm font-medium text-[#9a6a00]">
-                                    In afwachting
-                                </span>
+                                        In afwachting
+                                    </span>
                                 @else
                                     <span class="rounded-full bg-[#f0e2d4] px-3 py-1 text-sm font-medium text-[#7e6959]">
-                                    {{ ucfirst($reservation->status) }}
-                                </span>
+                                        {{ ucfirst($reservation->status) }}
+                                    </span>
                                 @endif
                             </td>
 
@@ -140,7 +147,7 @@
                             <tr class="border-b border-[#f7eee7] bg-[#fefaf5]">
                                 <td colspan="6" class="px-4 py-3 text-sm text-[#7e6959]">
                                     <span class="font-semibold">Opmerking:</span>
-                                    {{ $reservation->reservation_note }}`
+                                    {{ $reservation->reservation_note }}
                                 </td>
                             </tr>
                         @endif
