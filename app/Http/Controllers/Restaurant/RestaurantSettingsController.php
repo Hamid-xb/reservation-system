@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Restaurant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
+use App\Models\RestaurantType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -16,9 +17,14 @@ class RestaurantSettingsController extends Controller
 
         $restaurant->load(['information', 'logo', 'banner', 'openingHours']);
 
+        $restaurantTypes = RestaurantType::orderBy('name')->get();
         $openingHours = $restaurant->openingHours->keyBy('day_of_week');
 
-        return view('restaurant.settings.edit', compact('restaurant', 'openingHours'));
+        return view('restaurant.settings.edit', compact(
+            'restaurant',
+            'openingHours',
+            'restaurantTypes'
+        ));
     }
 
     public function update(Request $request, Restaurant $restaurant)
@@ -28,7 +34,7 @@ class RestaurantSettingsController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'restaurant_type' => ['nullable', 'string', 'max:255'],
+            'restaurant_type_id' => ['nullable', 'exists:restaurant_types,id'],
 
             'address' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
@@ -45,8 +51,8 @@ class RestaurantSettingsController extends Controller
 
         $restaurant->update([
             'name' => $validated['name'],
-            'description' => $validated['description'],
-            'restaurant_type' => $validated['restaurant_type'],
+            'description' => $validated['description'] ?? null,
+            'restaurant_type_id' => $validated['restaurant_type_id'] ?? null,
         ]);
 
         $restaurant->information()->updateOrCreate(
@@ -76,7 +82,9 @@ class RestaurantSettingsController extends Controller
             }
 
             if (empty($hours['open_time']) || empty($hours['close_time'])) {
-                continue;
+                return back()
+                    ->withErrors(['opening_hours' => 'Vul openingstijden in voor iedere dag die niet gesloten is.'])
+                    ->withInput();
             }
 
             $restaurant->openingHours()->updateOrCreate(
@@ -104,7 +112,6 @@ class RestaurantSettingsController extends Controller
         }
 
         $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-
         $file->move($publicFolder, $filename);
 
         $currentImage = $restaurant->images()
@@ -132,13 +139,12 @@ class RestaurantSettingsController extends Controller
 
     private function checkAccess(Request $request, Restaurant $restaurant): void
     {
-        $allowed = $request->user()->hasRestaurantRole($restaurant->id, [
-            'restaurant_owner',
-            'restaurant_manager',
-        ]);
-
-        if (! $allowed) {
-            abort(403);
-        }
+        abort_unless(
+            $request->user()->hasRestaurantRole($restaurant->id, [
+                'restaurant_owner',
+                'restaurant_manager',
+            ]),
+            403
+        );
     }
 }

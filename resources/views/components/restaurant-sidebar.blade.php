@@ -41,7 +41,7 @@
             'restaurant_staff'
         ]))
             <a
-                href="{{ $restaurant ? route('restaurant.reservations.index', $restaurant) : '#' }}"
+                href="{{ $restaurant ? route('restaurant.reservations.index', ['restaurant' => $restaurant, 'date' => now()->toDateString()]) : '#' }}"
                 class="mx-3 mb-2 flex items-center gap-3 rounded-2xl px-6 py-3 font-medium transition
                 {{ $active === 'reservations'
                     ? 'bg-[#c53a1f] text-white shadow-md'

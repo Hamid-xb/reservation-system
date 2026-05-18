@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class RestaurantReservationController extends Controller
 {
@@ -13,12 +14,22 @@ class RestaurantReservationController extends Controller
     {
         $this->checkAccess($request, $restaurant);
 
+        $date = $request->input('date', today()->toDateString());
+
+        $selectedDate = Carbon::parse($date)->toDateString();
+
         $reservations = $restaurant->reservations()
-            ->latest('start_datetime')
+            ->whereDate('start_datetime', $selectedDate)
+            ->orderBy('start_datetime')
             ->get();
 
-        return view('restaurant.reservations.index', compact('restaurant', 'reservations'));
+        return view('restaurant.reservations.index', compact(
+            'restaurant',
+            'reservations',
+            'selectedDate'
+        ));
     }
+
 
     public function updateStatus(Request $request, Restaurant $restaurant, Reservation $reservation)
     {

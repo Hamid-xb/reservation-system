@@ -8,6 +8,7 @@ use App\Models\RestaurantImage;
 use App\Models\RestaurantInformation;
 use App\Models\RestaurantTable;
 use App\Models\Reservation;
+use App\Models\RestaurantType;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
@@ -18,6 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(RoleSeeder::class);
+        $this->call([
+            RoleSeeder::class,
+            RestaurantTypeSeeder::class,
+        ]);
 
         $users = User::factory()->count(10)->create();
 
