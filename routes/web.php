@@ -2,8 +2,6 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Restaurant\RestaurantDashboardController;
 use App\Http\Controllers\Restaurant\RestaurantGalleryController;
