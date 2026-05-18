@@ -131,7 +131,7 @@
                                 </form>
 
                                 <a
-                                    href="{{ route('restaurant.reservations.index', ['restaurant' => $restaurant, 'date' => $reservation->start_datetime->toDateString()]) }}"
+                                    href="{{ route('restaurant.reservations.edit', [$restaurant, $reservation]) }}"
                                     class="rounded-full bg-[#e67e22] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#c96b18]"
                                 >
                                     Details

@@ -122,6 +122,16 @@ Route::middleware('auth')->group(function () {
                 'confirm'
             ])->name('reservations.confirm');
 
+            Route::get('/reservations/{reservation}/edit', [
+                RestaurantReservationController::class,
+                'edit'
+            ])->name('reservations.edit');
+
+            Route::put('/reservations/{reservation}', [
+                RestaurantReservationController::class,
+                'update'
+            ])->name('reservations.update');
+
             /*
             |--------------------------------------------------------------------------
             | Members
