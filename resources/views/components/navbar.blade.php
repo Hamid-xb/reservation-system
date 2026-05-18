@@ -26,7 +26,7 @@
                         </button>
 
                         <!-- Dropdown Menu -->
-                        <div x-show="userMenuOpen" 
+                        <div x-show="userMenuOpen"
                              @click.away="userMenuOpen = false"
                              x-transition:enter="transition ease-out duration-200"
                              x-transition:enter-start="opacity-0 translate-y-2"
@@ -35,7 +35,7 @@
                              x-transition:leave-start="opacity-100 translate-y-0"
                              x-transition:leave-end="opacity-0 translate-y-2"
                              class="absolute right-0 mt-3 w-72 bg-white rounded-2xl shadow-xl border border-amber-100 py-2 z-50">
-                            
+
                             <!-- User Info -->
                             <div class="px-6 py-4 border-b border-amber-50">
                                 <p class="font-bold text-stone-900">{{ Auth::user()->name }}</p>
@@ -65,32 +65,45 @@
                                      x-transition:enter-start="opacity-0 -translate-x-4"
                                      x-transition:enter-end="opacity-100 translate-x-0"
                                      class="absolute right-full top-0 mr-1 w-64 bg-white rounded-xl shadow-lg border border-amber-100 py-2">
-                                    
+
                                     @php
-                                        $userRestaurants = Auth::user()->restaurants ?? collect([
-                                            ['id' => 1, 'name' => 'De Librije'],
-                                            ['id' => 2, 'name' => 'De Kas'],
-                                            ['id' => 3, 'name' => 'Sushi Saito'],
-                                        ]);
+                                        $userRestaurants = auth()->user()
+                                            ->userRoles()
+                                            ->with('restaurant')
+                                            ->whereNotNull('restaurant_id')
+                                            ->get()
+                                            ->pluck('restaurant')
+                                            ->filter()
+                                            ->unique('id');
                                     @endphp
 
-                                    @foreach($userRestaurants as $restaurant)
-                                        <div class="flex items-center hover:bg-orange-50 transition-colors group">
-                                            <a href="#" 
-                                               class="flex-grow px-6 py-2.5 text-stone-700 hover:text-red-600 transition-colors text-sm">
-                                                📍 {{ $restaurant->name ?? $restaurant['name'] }}
+                                    @forelse($userRestaurants as $restaurant)
+                                        <div class="flex items-center transition-colors hover:bg-orange-50 group">
+                                            <a
+                                                href="{{ route('restaurant.dashboard', $restaurant) }}"
+                                                class="flex-grow px-6 py-2.5 text-sm text-stone-700 transition-colors hover:text-red-600"
+                                            >
+                                                📍 {{ $restaurant->name }}
                                             </a>
-                                            <div class="w-px h-6 bg-amber-200"></div>
-                                            <a href="#" 
-                                               class="px-4 py-2.5 opacity-40 hover:opacity-100 hover:rotate-90 transition-all duration-300 text-lg"
-                                               title="Instellingen">
+
+                                            <div class="h-6 w-px bg-amber-200"></div>
+
+                                            <a
+                                                href="{{ route('restaurant.settings.edit', $restaurant) }}"
+                                                class="px-4 py-2.5 text-lg opacity-40 transition-all duration-300 hover:rotate-90 hover:opacity-100"
+                                                title="Dashboard"
+                                            >
                                                 ⚙️
                                             </a>
                                         </div>
-                                    @endforeach
+                                    @empty
+                                        <div class="px-6 py-3 text-sm text-stone-500">
+                                            Geen restaurants gevonden.
+                                        </div>
+                                    @endforelse
 
                                     <div class="border-t border-amber-100 mt-2 pt-2">
-                                        <a href="#" 
+                                        <a href="#"
                                            class="block px-6 py-2.5 text-red-600 font-semibold hover:bg-orange-50 text-sm">
                                             + Restaurant toevoegen
                                         </a>
@@ -136,7 +149,7 @@
         </div>
 
         <!-- Mobile Navigation -->
-        <div x-show="open" 
+        <div x-show="open"
              x-transition:enter="transition ease-out duration-200"
              x-transition:enter-start="opacity-0 -translate-y-2"
              x-transition:enter-end="opacity-100 translate-y-0"
@@ -153,7 +166,7 @@
                     <a href="#" class="px-3 py-2 rounded-lg text-stone-700 hover:bg-orange-50">
                         ⚙️ Profielinstellingen
                     </a>
-                    
+
                     <form method="POST" action="#" class="mt-2">
                         @csrf
                         <button type="submit" class="w-full px-3 py-2 text-left rounded-lg text-red-500 hover:bg-red-50 font-medium">
