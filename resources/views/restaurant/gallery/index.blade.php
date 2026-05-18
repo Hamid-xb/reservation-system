@@ -1,6 +1,6 @@
 <x-restaurant-layout
     :restaurant="$restaurant"
-    active="gallery"
+    active="photos"
     header="Foto's"
     subheader="Beheer de galerij van {{ $restaurant->name }}"
 >

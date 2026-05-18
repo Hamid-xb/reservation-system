@@ -72,4 +72,17 @@ class RestaurantReservationController extends Controller
             abort(404);
         }
     }
+
+    public function confirm(Request $request, Restaurant $restaurant, Reservation $reservation)
+    {
+        $this->checkAccess($request, $restaurant);
+
+        abort_unless($reservation->restaurant_id === $restaurant->id, 404);
+
+        $reservation->update([
+            'status' => 'confirmed',
+        ]);
+
+        return back()->with('success', 'Reservering bevestigd.');
+    }
 }

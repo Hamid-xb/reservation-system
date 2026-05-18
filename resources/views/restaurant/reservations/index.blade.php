@@ -88,10 +88,24 @@
                                 {{ $reservation->number_of_people }}
                             </td>
 
-                            <td>
-                                <span class="rounded-full bg-[#ffe8e3] px-3 py-1 text-sm font-medium text-[#c53a1f]">
-                                    {{ $reservation->status }}
+                            <td class="py-4">
+                                @if($reservation->status === 'confirmed')
+                                    <span class="rounded-full bg-[#e6f4ea] px-3 py-1 text-sm font-medium text-[#2e7d32]">
+                                        Bevestigd
+                                    </span>
+                                @elseif($reservation->status === 'cancelled')
+                                    <span class="rounded-full bg-[#ffe8e3] px-3 py-1 text-sm font-medium text-[#c53a1f]">
+                                    Geannuleerd
                                 </span>
+                                @elseif($reservation->status === 'pending')
+                                    <span class="rounded-full bg-[#fff4d6] px-3 py-1 text-sm font-medium text-[#9a6a00]">
+                                    In afwachting
+                                </span>
+                                @else
+                                    <span class="rounded-full bg-[#f0e2d4] px-3 py-1 text-sm font-medium text-[#7e6959]">
+                                    {{ ucfirst($reservation->status) }}
+                                </span>
+                                @endif
                             </td>
 
                             <td class="py-4">
