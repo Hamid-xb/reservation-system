@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReservationController;
@@ -23,12 +23,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware([
-    'auth',
-    'verified',
-])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     // reservation routes
@@ -37,18 +31,43 @@ Route::middleware('auth')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Profile
+    | User
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
+    Route::prefix('user')
+        ->name('user.')
+        ->group(function () {
 
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
+        /*
+        |--------------------------------------------------------------------------
+        | Profile
+        |--------------------------------------------------------------------------
+        */
 
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
+        Route::get('/profile', [User\ProfileController::class, 'edit'])
+            ->name('profile.edit');
+
+        Route::patch('/profile', [User\ProfileController::class, 'update'])
+            ->name('profile.update');
+
+        Route::delete('/profile', [User\ProfileController::class, 'destroy'])
+            ->name('profile.destroy');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Reservations
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/reservations', [User\ReservationController::class, 'index'])
+            ->name('reservations.index');
+
+        Route::delete('/reservations/{reservation}', [User\ReservationController::class, 'destroy'])
+            ->name('reservations.destroy');
+        
+    });
+
 
     /*
     |--------------------------------------------------------------------------
@@ -60,63 +79,42 @@ Route::middleware('auth')->group(function () {
         ->name('restaurant.')
         ->group(function () {
 
-            /*
-            |--------------------------------------------------------------------------
-            | Dashboard
-            |--------------------------------------------------------------------------
-            */
+        /*
+        |--------------------------------------------------------------------------
+        | Dashboard
+        |--------------------------------------------------------------------------
+        */
 
-            Route::get('/dashboard', [
-                RestaurantDashboardController::class,
-                'index'
-            ])->name('dashboard');
+        Route::get('/dashboard', [
+            RestaurantDashboardController::class,
+            'index'
+        ])->name('dashboard');
 
-            /*
-            |--------------------------------------------------------------------------
-            | Tables
-            |--------------------------------------------------------------------------
-            */
+        /*
+        |--------------------------------------------------------------------------
+        | Tables
+        |--------------------------------------------------------------------------
+        */
 
-            Route::get('/tables', [
-                RestaurantTableController::class,
-                'index'
-            ])->name('tables.index');
+        Route::get('/tables', [
+            RestaurantTableController::class,
+            'index'
+        ])->name('tables.index');
 
-            Route::post('/tables', [
-                RestaurantTableController::class,
-                'store'
-            ])->name('tables.store');
+        Route::post('/tables', [
+            RestaurantTableController::class,
+            'store'
+        ])->name('tables.store');
 
-            Route::put('/tables/{table}', [
-                RestaurantTableController::class,
-                'update'
-            ])->name('tables.update');
+        Route::put('/tables/{table}', [
+            RestaurantTableController::class,
+            'update'
+        ])->name('tables.update');
 
-            Route::delete('/tables/{table}', [
-                RestaurantTableController::class,
-                'destroy'
-            ])->name('tables.destroy');
-
-             /*
-             |--------------------------------------------------------------------------
-             | Reservations
-             |--------------------------------------------------------------------------
-             */
-
-            Route::get('/reservations', [
-                RestaurantReservationController::class,
-                'index'
-            ])->name('reservations.index');
-
-            Route::patch('/reservations/{reservation}/status', [
-                RestaurantReservationController::class,
-                'updateStatus'
-            ])->name('reservations.update-status');
-
-            Route::delete('/reservations/{reservation}', [
-                RestaurantReservationController::class,
-                'destroy'
-            ])->name('reservations.destroy');
+        Route::delete('/tables/{table}', [
+            RestaurantTableController::class,
+            'destroy'
+        ])->name('tables.destroy');
 
             /*
             |--------------------------------------------------------------------------
@@ -124,67 +122,85 @@ Route::middleware('auth')->group(function () {
             |--------------------------------------------------------------------------
             */
 
-            Route::get('/members', [
-                RestaurantMemberController::class,
-                'index'
-            ])->name('members.index');
+        Route::get('/reservations', [
+            RestaurantReservationController::class,
+            'index'
+        ])->name('reservations.index');
 
-            Route::post('/members', [
-                RestaurantMemberController::class,
-                'store'
-            ])->name('members.store');
+        Route::patch('/reservations/{reservation}/status', [
+            RestaurantReservationController::class,
+            'updateStatus'
+        ])->name('reservations.update-status');
 
-            Route::patch('/members/{userRole}', [
-                RestaurantMemberController::class,
-                'update'
-            ])->name('members.update');
+        Route::delete('/reservations/{reservation}', [
+            RestaurantReservationController::class,
+            'destroy'
+        ])->name('reservations.destroy');
 
-            Route::delete('/members/{userRole}', [
-                RestaurantMemberController::class,
-                'destroy'
-            ])->name('members.destroy');
+        /*
+        |--------------------------------------------------------------------------
+        | Reservations
+        |--------------------------------------------------------------------------
+        */
 
+        Route::get('/members', [
+            RestaurantMemberController::class,
+            'index'
+        ])->name('members.index');
 
-            Route::get('/gallery', [
-                RestaurantGalleryController::class,
-                'index'
-            ])->name('gallery.index');
+        Route::post('/members', [
+            RestaurantMemberController::class,
+            'store'
+        ])->name('members.store');
 
-            Route::post('/gallery', [
-                RestaurantGalleryController::class,
-                'store'
-            ])->name('gallery.store');
+        Route::patch('/members/{userRole}', [
+            RestaurantMemberController::class,
+            'update'
+        ])->name('members.update');
 
-            Route::patch('/gallery/order', [
-                RestaurantGalleryController::class,
-                'updateOrder'
-            ])->name('gallery.order');
-
-
-            Route::delete('/gallery/{image}', [
-                RestaurantGalleryController::class,
-                'destroy'
-            ])->name('gallery.destroy');
-
-            /*
-            |--------------------------------------------------------------------------
-            | Settings
-            |--------------------------------------------------------------------------
-            */
-
-            Route::get('/settings', [
-                RestaurantSettingsController::class,
-                'edit'
-            ])->name('settings.edit');
-
-            Route::put('/settings', [
-                RestaurantSettingsController::class,
-                'update'
-            ])->name('settings.update');
+        Route::delete('/members/{userRole}', [
+            RestaurantMemberController::class,
+            'destroy'
+        ])->name('members.destroy');
 
 
+        Route::get('/gallery', [
+            RestaurantGalleryController::class,
+            'index'
+        ])->name('gallery.index');
 
-        });
+        Route::post('/gallery', [
+            RestaurantGalleryController::class,
+            'store'
+        ])->name('gallery.store');
+
+        Route::patch('/gallery/order', [
+            RestaurantGalleryController::class,
+            'updateOrder'
+        ])->name('gallery.order');
+
+
+        Route::delete('/gallery/{image}', [
+            RestaurantGalleryController::class,
+            'destroy'
+        ])->name('gallery.destroy');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Settings
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/settings', [
+            RestaurantSettingsController::class,
+            'edit'
+        ])->name('settings.edit');
+
+        Route::put('/settings', [
+            RestaurantSettingsController::class,
+            'update'
+        ])->name('settings.update');
+    });
 
 });
 
