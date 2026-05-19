@@ -1,4 +1,4 @@
-<x-app-layout 
+<x-app-layout
     title="Home - Tafello">
     <section id="search" class="mt-5">
         <form action="{{ route('search') }}" method="GET">
@@ -109,7 +109,9 @@
 
                         <!-- Description -->
                         @if($restaurant->description)
-                            <p class="text-stone-600 text-sm mb-4 leading-relaxed">{{ $restaurant->description }}</p>
+                            <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                                {{ \Illuminate\Support\Str::limit($restaurant->description, 120) }}
+                            </p>
                         @endif
 
                         <!-- Button -->
@@ -127,5 +129,5 @@
                 </div>
             @endforeach
         </div>
-    </section> 
+    </section>
 </x-app-layout>

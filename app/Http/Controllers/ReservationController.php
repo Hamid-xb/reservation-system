@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
-    public function create(Restaurant $restaurant)
+    public function create(Request $request, Restaurant $restaurant)
     {
         $openeningHours = $restaurant->openingHours()->get();
         $tables = $restaurant->tables()->get();
+        $isStaffCreated = $request->reservation_type === 'staff_created';
 
-        return view('reservations', compact('restaurant', 'openeningHours', 'tables'));
+
+        return view('reservations', compact('restaurant', 'openeningHours', 'tables', 'isStaffCreated'));
     }
 
     public function store(Request $request, $restaurantId)
