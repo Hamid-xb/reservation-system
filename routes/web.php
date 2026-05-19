@@ -3,6 +3,7 @@
 use App\Http\Controllers\User;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Restaurant\RestaurantDashboardController;
 use App\Http\Controllers\Restaurant\RestaurantGalleryController;
@@ -116,9 +117,24 @@ Route::middleware('auth')->group(function () {
             'destroy'
         ])->name('tables.destroy');
 
+            Route::patch('/reservations/{reservation}/confirm', [
+                RestaurantReservationController::class,
+                'confirm'
+            ])->name('reservations.confirm');
+
+            Route::get('/reservations/{reservation}/edit', [
+                RestaurantReservationController::class,
+                'edit'
+            ])->name('reservations.edit');
+
+            Route::put('/reservations/{reservation}', [
+                RestaurantReservationController::class,
+                'update'
+            ])->name('reservations.update');
+
             /*
             |--------------------------------------------------------------------------
-            | Reservations
+            | Members
             |--------------------------------------------------------------------------
             */
 

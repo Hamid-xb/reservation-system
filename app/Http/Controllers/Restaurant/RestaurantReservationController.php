@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class RestaurantReservationController extends Controller
 {
@@ -13,12 +14,22 @@ class RestaurantReservationController extends Controller
     {
         $this->checkAccess($request, $restaurant);
 
+        $date = $request->input('date', today()->toDateString());
+
+        $selectedDate = Carbon::parse($date)->toDateString();
+
         $reservations = $restaurant->reservations()
-            ->latest('start_datetime')
+            ->whereDate('start_datetime', $selectedDate)
+            ->orderBy('start_datetime')
             ->get();
 
-        return view('restaurant.reservations.index', compact('restaurant', 'reservations'));
+        return view('restaurant.reservations.index', compact(
+            'restaurant',
+            'reservations',
+            'selectedDate'
+        ));
     }
+
 
     public function updateStatus(Request $request, Restaurant $restaurant, Reservation $reservation)
     {
@@ -44,6 +55,43 @@ class RestaurantReservationController extends Controller
         return back()->with('success', 'Reservering verwijderd.');
     }
 
+    public function edit(Request $request, Restaurant $restaurant, Reservation $reservation)
+    {
+        $this->checkAccess($request, $restaurant);
+
+        abort_unless($reservation->restaurant_id === $restaurant->id, 404);
+
+        return view('restaurant.reservations.edit', compact('restaurant', 'reservation'));
+    }
+
+    public function update(Request $request, Restaurant $restaurant, Reservation $reservation)
+    {
+        $this->checkAccess($request, $restaurant);
+
+        abort_unless($reservation->restaurant_id === $restaurant->id, 404);
+
+        $validated = $request->validate([
+            'date' => ['required', 'date'],
+            'time' => ['required'],
+            'number_of_people' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $start = Carbon::parse($validated['date'] . ' ' . $validated['time']);
+
+        $reservation->update([
+            'start_datetime' => $start->format('Y-m-d H:i:s'),
+            'end_datetime' => $start->copy()->addHours(2)->format('Y-m-d H:i:s'),
+            'number_of_people' => $validated['number_of_people'],
+        ]);
+
+        return redirect()
+            ->route('restaurant.reservations.index', [
+                'restaurant' => $restaurant,
+                'date' => $start->toDateString(),
+            ])
+            ->with('success', 'Reservering aangepast.');
+    }
+
     private function checkAccess(Request $request, Restaurant $restaurant): void
     {
         if (! $request->user()->hasRestaurantRole($restaurant->id, [
@@ -60,5 +108,18 @@ class RestaurantReservationController extends Controller
         if ($reservation->restaurant_id !== $restaurant->id) {
             abort(404);
         }
+    }
+
+    public function confirm(Request $request, Restaurant $restaurant, Reservation $reservation)
+    {
+        $this->checkAccess($request, $restaurant);
+
+        abort_unless($reservation->restaurant_id === $restaurant->id, 404);
+
+        $reservation->update([
+            'status' => 'confirmed',
+        ]);
+
+        return back()->with('success', 'Reservering bevestigd.');
     }
 }

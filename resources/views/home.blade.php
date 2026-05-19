@@ -3,14 +3,14 @@
     <section id="search" class="mt-5">
         <form action="{{ route('search') }}" method="GET">
             <div class="bg-white rounded-full p-2 pl-6 flex flex-col md:flex-row items-center gap-3 shadow-lg border border-amber-200">
-                
+
                 <!-- Restaurant Name Search -->
                 <div class="flex items-center w-full md:flex-1">
                     <span class="text-stone-400 mr-2">🔍</span>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         name="name"
-                        placeholder="Restaurant naam..." 
+                        placeholder="Restaurant naam..."
                         value="{{ $search ?? '' }}"
                         class="w-full py-3 px-2 bg-transparent border-none focus:ring-0 text-stone-700 placeholder-stone-400 text-sm"
                     >
@@ -19,10 +19,10 @@
                 <!-- Location Input -->
                 <div class="flex items-center w-full md:flex-1 border-t md:border-t-0 md:border-l border-amber-200 md:pl-4">
                     <span class="text-stone-400 mr-2">📍</span>
-                    <input 
+                    <input
                         name="location"
-                        placeholder="Locatie (stad)..." 
-                        value="{{ $location ?? '' }}" 
+                        placeholder="Locatie (stad)..."
+                        value="{{ $location ?? '' }}"
                         class="w-full py-3 px-2 bg-transparent border-none focus:ring-0 text-stone-700 placeholder-stone-400 text-sm"
                     >
                 </div>
@@ -77,17 +77,17 @@
         @endif
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($restaurants as $restaurant)   
+            @foreach($restaurants as $restaurant)
                 <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-amber-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     <!-- Image -->
                         <a href="{{ route('restaurants.show', $restaurant->id) }}" class="block">
                         <div class="h-48 bg-gradient-to-br from-amber-200 to-orange-200 relative flex items-center justify-center">
                             @if($restaurant->banner)
-                                <img src="{{ $restaurant->banner }}" alt="{{ $restaurant->name }}" class="w-full h-full object-cover">
+                                <img src="{{ asset($restaurant->banner->image_url) }}" alt="{{ $restaurant->name }}" class="w-full h-full object-cover">
                             @else
                                 <img src="{{ asset("img/default-restaurant-banner.jpg") }}" alt="Default Restaurant Banner" class="w-full h-full object-cover">
                             @endif
-                            
+
                             <!-- Cuisine Tag -->
                             @if($restaurant->type)
                                 <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-red-600 uppercase tracking-wide">
@@ -101,20 +101,23 @@
                     <div class="p-6">
                         <!-- Title -->
                         <h3 class="text-xl font-bold text-stone-900 mb-2">{{ $restaurant->name }}</h3>
-                        
+
                         <!-- Location -->
                         @if($restaurant->location)
                             <p class="text-stone-500 text-sm mb-3">📍 {{ $restaurant->location }}</p>
                         @endif
-                        
+
                         <!-- Description -->
                         @if($restaurant->description)
                             <p class="text-stone-600 text-sm mb-4 leading-relaxed">{{ $restaurant->description }}</p>
                         @endif
-                        
+
                         <!-- Button -->
                         <div class="mt-4">
-                        <a href="{{ route('reservations.create', $restaurant->id) }}">
+                        <a href="{{ route('reservations.create', [
+                            $restaurant->id,
+                            'date' => now()->toDateString()
+                        ]) }}">
                             <x-primary-button class="w-full">
                                 Reserveer nu
                             </x-primary-button>

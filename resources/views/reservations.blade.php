@@ -1,7 +1,7 @@
 <x-app-layout 
     title="Reservering maken - Tafello">
 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    
+
     <!-- Back Button -->
     <a href="{{ route('restaurants.show', $restaurant) }}" class="inline-flex items-center text-stone-600 hover:text-red-600 mb-6 transition-colors">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -12,7 +12,7 @@
 
     <!-- Form Card -->
     <div class="bg-white rounded-3xl shadow-lg border border-amber-100 overflow-hidden">
-        
+
         <!-- Header -->
         <div class="bg-gradient-to-br from-amber-50 to-orange-50 px-8 py-6 border-b border-amber-100">
             <h1 class="text-3xl font-extrabold text-stone-900">
@@ -29,20 +29,49 @@
         <!-- Form -->
         <form action="{{ route('reservations.store', $restaurant) }}" method="POST" class="p-8">
             @csrf
-            
+
+            <input
+                type="hidden"
+                name="reservation_type"
+                value="{{ request('reservation_type', 'user_created') }}"
+            >
+
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
+
+                @if($isStaffCreated)
+                    <div class="md:col-span-2">
+                        <label for="name" class="block text-sm font-semibold text-stone-700 mb-2">
+                            Naam gast
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="{{ old('name') }}"
+                            placeholder="Naam van de gast"
+                            class="w-full px-4 py-3 border border-amber-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all @error('name') border-red-500 @enderror"
+                            required
+                        >
+
+                        @error('name')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                @endif
+
                 <!-- Date -->
                 <div>
                     <label for="date" class="block text-sm font-semibold text-stone-700 mb-2">
                         📅 Datum
                     </label>
-                    <input 
-                        type="date" 
-                        id="date" 
-                        name="date" 
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
                         min="{{ date('Y-m-d') }}"
-                        value="{{ old('date') }}"
+                        value="{{ old('date', request('date')) }}"
                         class="w-full px-4 py-3 border border-amber-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all @error('date') border-red-500 @enderror"
                         required
                     >
@@ -56,9 +85,9 @@
                     <label for="time" class="block text-sm font-semibold text-stone-700 mb-2">
                         ⏰ Tijd
                     </label>
-                    <select 
-                        id="time" 
-                        name="time" 
+                    <select
+                        id="time"
+                        name="time"
                         class="w-full px-4 py-3 border border-amber-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all @error('time') border-red-500 @enderror"
                         required
                     >
@@ -86,9 +115,9 @@
                     <label for="guests" class="block text-sm font-semibold text-stone-700 mb-2">
                         👥 Aantal personen
                     </label>
-                    <select 
-                        id="guests" 
-                        name="guests" 
+                    <select
+                        id="guests"
+                        name="guests"
                         class="w-full px-4 py-3 border border-amber-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all @error('guests') border-red-500 @enderror"
                         required
                     >
@@ -110,9 +139,9 @@
                     <label for="phone" class="block text-sm font-semibold text-stone-700 mb-2">
                         � Telefoonnummer
                     </label>
-                    <input 
-                        type="tel" 
-                        id="phone" 
+                    <input
+                        type="tel"
+                        id="phone"
                         name="phone"
                         value="{{ old('phone') }}"
                         placeholder="Bijv. 0612345678"
@@ -129,9 +158,9 @@
                     <label for="special_requests" class="block text-sm font-semibold text-stone-700 mb-2">
                         💬 Speciale verzoeken (optioneel)
                     </label>
-                    <textarea 
-                        id="special_requests" 
-                        name="special_requests" 
+                    <textarea
+                        id="special_requests"
+                        name="special_requests"
                         rows="3"
                         placeholder="Bijv. allergieën, dieetwensen, speciale gelegenheid..."
                         class="w-full px-4 py-3 border border-amber-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all"
