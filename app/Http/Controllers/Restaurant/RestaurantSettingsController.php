@@ -33,7 +33,7 @@ class RestaurantSettingsController extends Controller
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:1000'],
             'restaurant_type_id' => ['nullable', 'exists:restaurant_types,id'],
 
             'address' => ['required', 'string', 'max:255'],

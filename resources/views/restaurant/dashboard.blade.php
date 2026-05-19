@@ -35,7 +35,7 @@
                 {{ $pendingReservationsCount }}
             </div>
             <div class="mt-2 text-[#6f5b4b]">
-                In afwachting
+                In behandeling
             </div>
         </div>
 
@@ -104,7 +104,7 @@
                                 </span>
                             @elseif($reservation->status === 'pending')
                                 <span class="rounded-full bg-[#fff4d6] px-3 py-1 text-sm font-medium text-[#9a6a00]">
-                                    In afwachting
+                                    In behandeling
                                 </span>
                             @else
                                 <span class="rounded-full bg-[#ffe8e3] px-3 py-1 text-sm font-medium text-[#c53a1f]">

@@ -1,6 +1,8 @@
-<x-app-layout 
+<x-app-layout
     title="{{ $restaurant->name }} - Tafello">
 <div>
+
+    <div>
 
     <!-- Hero Image -->
     <div class="h-64 md:h-96 bg-gradient-to-br from-red-600 to-orange-500 rounded-3xl flex items-center justify-center text-white text-5xl md:text-7xl mb-8">

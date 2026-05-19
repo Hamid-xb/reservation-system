@@ -106,7 +106,7 @@
                                     </span>
                                 @elseif($reservation->status === 'pending')
                                     <span class="rounded-full bg-[#fff4d6] px-3 py-1 text-sm font-medium text-[#9a6a00]">
-                                        In afwachting
+                                        In behandeling
                                     </span>
                                 @else
                                     <span class="rounded-full bg-[#f0e2d4] px-3 py-1 text-sm font-medium text-[#7e6959]">

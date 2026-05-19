@@ -4,6 +4,7 @@ use App\Http\Controllers\User;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RestaurantCreateController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Restaurant\RestaurantDashboardController;
 use App\Http\Controllers\Restaurant\RestaurantGalleryController;
@@ -22,7 +23,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
-Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
 
 
 Route::middleware('auth')->group(function () {
@@ -66,13 +66,36 @@ Route::middleware('auth')->group(function () {
 
         Route::delete('/reservations/{reservation}', [User\ReservationController::class, 'destroy'])
             ->name('reservations.destroy');
-        
+
     });
 
 
     /*
     |--------------------------------------------------------------------------
-    | Restaurant
+    | Restaurant registration
+    |--------------------------------------------------------------------------
+    */
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/restaurants/create', [
+            RestaurantCreateController::class,
+            'create'
+        ])->name('restaurants.create');
+
+        Route::post('/restaurants', [
+            RestaurantCreateController::class,
+            'store'
+        ])->name('restaurants.store');
+
+        Route::get('/restaurants/{restaurant}', [
+            RestaurantController::class, 'show'
+        ])->name('restaurants.show');
+
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Restaurants
     |--------------------------------------------------------------------------
     */
 
@@ -216,6 +239,13 @@ Route::middleware('auth')->group(function () {
             RestaurantSettingsController::class,
             'update'
         ])->name('settings.update');
+            /*
+            |--------------------------------------------------------------------------
+            | Restaurant registration
+            |--------------------------------------------------------------------------
+            */
+
+
     });
 
 });

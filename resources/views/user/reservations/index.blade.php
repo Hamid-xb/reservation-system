@@ -5,22 +5,22 @@
 
             @if($reservations->isEmpty())
                 <p class="text-stone-500">
-                    Je hebt nog geen reserveringen gemaakt. 
-                    <a href="{{ route('restaurants.index') }}" class="text-red-600 hover:underline">Bekijk restaurants</a> 
+                    Je hebt nog geen reserveringen gemaakt.
+                    <a href="{{ route('restaurants.index') }}" class="text-red-600 hover:underline">Bekijk restaurants</a>
                     en reserveer jouw tafel!
                 </p>
             @else
                 <!-- Tabs -->
                 <div x-data="{ activeTab: 'upcoming' }">
                     <div class="flex gap-2 mb-6">
-                        <button 
+                        <button
                             @click="activeTab = 'upcoming'"
                             :class="activeTab === 'upcoming' ? 'bg-red-600 text-white' : 'bg-white text-stone-600 hover:bg-amber-50 border border-amber-200'"
                             class="px-6 py-2.5 rounded-full font-semibold transition-colors text-sm"
                         >
                             📅 Toekomstig
                         </button>
-                        <button 
+                        <button
                             @click="activeTab = 'past'"
                             :class="activeTab === 'past' ? 'bg-red-600 text-white' : 'bg-white text-stone-600 hover:bg-amber-50 border border-amber-200'"
                             class="px-6 py-2.5 rounded-full font-semibold transition-colors text-sm"
@@ -74,7 +74,7 @@
                                                         <div>
                                                             <p class="text-sm font-medium text-stone-900">{{ $reservation->restaurant->name }}</p>
                                                             <p class="text-xs text-stone-500">{{ $reservation->restaurant->location }}</p>
-                                                        </div>  
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -82,7 +82,7 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     @if($reservation->status == 'confirmed')
-                                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Goedgekeurd</span>
+                                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Bevestigd</span>
                                                     @elseif($reservation->status == 'cancelled')
                                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Geannuleerd</span>
                                                     @else
@@ -91,7 +91,7 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     @if($reservation->status == 'confirmed' || $reservation->status == 'pending')
-                                                        <button 
+                                                        <button
                                                             x-data
                                                             @click="$dispatch('open-modal', 'confirm-reservation-deletion-{{ $reservation->id }}')"
                                                             class="px-4 py-2 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition-colors text-sm"
@@ -103,7 +103,7 @@
                                                             <form method="POST" action="{{ route('user.reservations.destroy', $reservation->id) }}" class="p-6">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                
+
                                                                 <div class="text-center">
                                                                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
                                                                         <span class="text-2xl">⚠️</span>
@@ -171,7 +171,7 @@
                                                         <div>
                                                             <p class="text-sm font-medium text-stone-900">{{ $reservation->restaurant->name }}</p>
                                                             <p class="text-xs text-stone-500">{{ $reservation->restaurant->location }}</p>
-                                                        </div>  
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
