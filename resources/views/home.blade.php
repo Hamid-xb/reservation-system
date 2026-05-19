@@ -91,7 +91,7 @@
                             <!-- Cuisine Tag -->
                             @if($restaurant->type)
                                 <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-red-600 uppercase tracking-wide">
-                                    {{ $restaurant->type }} keuken
+                                    {{ $restaurant->type?->name ?? 'onbekende' }}
                                 </span>
                             @endif
                         </div>
