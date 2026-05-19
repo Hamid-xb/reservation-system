@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\RestaurantType;
 
 class Restaurant extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'status', 'restaurant_type'];
+    protected $fillable = ['name', 'description', 'status', 'restaurant_type_id'];
 
     public function tables(){
         return $this->hasMany(RestaurantTable::class);
@@ -33,6 +34,10 @@ class Restaurant extends Model
     {
         return $this->hasOne(RestaurantImage::class)
             ->where('image_type', 'logo');
+    }
+    public function type()
+    {
+        return $this->belongsTo(RestaurantType::class, 'restaurant_type_id');
     }
 
     public function banner()
