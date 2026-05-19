@@ -42,7 +42,7 @@
                                 <p class="text-sm text-stone-500 mt-1">{{ Auth::user()->email }}</p>
                             </div>
 
-                            <a href="#" class="flex items-center gap-3 px-6 py-3 text-stone-700 hover:bg-orange-50 hover:text-red-600 transition-all group">
+                            <a href="{{ route('user.reservations.index') }}" class="flex items-center gap-3 px-6 py-3 text-stone-700 hover:bg-orange-50 hover:text-red-600 transition-all group">
                                 <span>📋</span>
                                 <span>Mijn Reserveringen</span>
                             </a>
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
 
-                            <a href="#" class="flex items-center gap-3 px-6 py-3 text-stone-700 hover:bg-orange-50 hover:text-red-600 transition-all">
+                            <a href="{{ route('user.profile.edit') }}" class="flex items-center gap-3 px-6 py-3 text-stone-700 hover:bg-orange-50 hover:text-red-600 transition-all">
                                 <span>⚙️</span>
                                 <span>Profielinstellingen</span>
                             </a>

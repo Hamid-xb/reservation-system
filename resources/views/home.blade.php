@@ -1,6 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Home - Tafello')
-@section('content')
+<x-app-layout 
+    title="Home - Tafello">
     <section id="search" class="mt-5">
         <form action="{{ route('search') }}" method="GET">
             <div class="bg-white rounded-full p-2 pl-6 flex flex-col md:flex-row items-center gap-3 shadow-lg border border-amber-200">
@@ -128,5 +127,5 @@
                 </div>
             @endforeach
         </div>
-    </section>
-@endsection
+    </section> 
+</x-app-layout>

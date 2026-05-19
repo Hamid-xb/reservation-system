@@ -1,18 +1,5 @@
-<!-- resources/views/reservations/create.blade.php -->
-@extends('layouts.app')
-
-@section('title', 'Reservering maken')
-
-@section('content')
-    @php
-        $isStaffCreated = request('reservation_type') === 'staff_created';
-    @endphp
-
-    @if($errors->any())
-        <div class="mb-6 rounded-2xl bg-red-100 px-5 py-4 text-red-700">
-            {{ $errors->first() }}
-        </div>
-    @endif
+<x-app-layout 
+    title="Reservering maken - Tafello">
 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
     <!-- Back Button -->
@@ -196,4 +183,4 @@
         </form>
     </div>
 </div>
-@endsection
+</x-app-layout>

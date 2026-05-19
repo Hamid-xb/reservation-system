@@ -1,17 +1,5 @@
-<!-- resources/views/restaurants/show.blade.php -->
-@extends('layouts.app')
-
-@section('title', $restaurant->name)
-
-@section('content')
-    @php
-        $canOpenDashboard = auth()->check()
-            && auth()->user()->hasRestaurantRole($restaurant->id, [
-                'restaurant_owner',
-                'restaurant_manager',
-                'restaurant_staff',
-            ]);
-    @endphp
+<x-app-layout 
+    title="{{ $restaurant->name }} - Tafello">
 <div>
 
     <!-- Hero Image -->
@@ -131,4 +119,4 @@
 
     </div>
 </div>
-@endsection
+</x-app-layout>
